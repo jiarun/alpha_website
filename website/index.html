@@ -1,0 +1,116 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><link rel="icon" type="image/png" href="/favicon.ico"><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Alpha Ry Sports | Badminton & Cricket Coaching in Espoo, Finland</title><meta name="description" content="Alpha Ry is a sports club in Espoo, Finland offering professional badminton and cricket coaching for kids and adults. Join us today!" /><meta name="keywords" content="sports club Finland, badminton coaching Espoo, cricket coaching Finland, Alpha Ry, sulkapallo Espoo, kriketti Suomi, kids sports Espoo" /><meta name="author" content="Alpha Ry" /><meta name="robots" content="index, follow" /><link rel="canonical" href="https://www.alphary.org/" /><meta property="og:title" content="Alpha Ry Sports | Badminton & Cricket in Espoo, Finland" /><meta property="og:description" content="Professional badminton and cricket coaching for kids and adults in Espoo, Finland." /><meta property="og:image" content="https://www.alphary.org/images/alpha_logo.png" /><meta property="og:url" content="https://www.alphary.org/" /><meta property="og:type" content="website" /><meta property="og:locale" content="fi_FI" /><meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content="Alpha Ry Sports | Espoo, Finland" /><meta name="twitter:description" content="Professional badminton and cricket coaching in Espoo, Finland." /><meta name="twitter:image" content="https://www.alphary.org/images/alpha_logo.png" /><script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "SportsOrganization",
+"name": "Alpha Ry",
+"url": "https://www.alphary.org/",
+"logo": "https://www.alphary.org/images/alpha_logo.png",
+"description": "Sports club offering badminton and cricket coaching in Espoo, Finland.",
+"address": {
+"@type": "PostalAddress",
+"addressLocality": "Espoo",
+"addressCountry": "FI"
+},
+"email": "info@alphary.org",
+"sameAs": [
+"https://www.facebook.com/profile.php?id=61573707081824",
+"https://www.instagram.com/vralphary/"
+]
+}
+</script><style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+font-family: 'Segoe UI', sans-serif;
+min-height: 100vh;
+background: #0a0a0a;
+display: flex; flex-direction: column;
+align-items: center; justify-content: center;
+padding: 2rem;
+}
+.lang-switcher {
+position: fixed; top: 1.5rem; right: 2rem;
+display: flex; gap: 0.5rem;
+}
+.lang-btn {
+background: transparent; border: 1px solid rgba(255,255,255,0.4);
+color: #fff; padding: 0.3rem 0.8rem; border-radius: 20px;
+cursor: pointer; font-size: 0.85rem; transition: all 0.2s;
+}
+.lang-btn.active, .lang-btn:hover { background: #fdd835; color: #1a1a1a; border-color: #fdd835; }
+.logo-wrap { text-align: center; margin-bottom: 3rem; }
+.logo-wrap img { height: 70px; width: auto; }
+.logo-wrap h1 { color: #fff; font-size: 1.8rem; font-weight: 900; margin-top: 1rem; letter-spacing: 1px; }
+.logo-wrap p { color: rgba(255,255,255,0.6); margin-top: 0.5rem; font-size: 1rem; }
+.sports-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 2rem;
+width: 100%;
+max-width: 800px;
+}
+.sport-card {
+position: relative; overflow: hidden;
+border-radius: 24px; cursor: pointer;
+text-decoration: none;
+aspect-ratio: 3/4;
+display: flex; flex-direction: column;
+align-items: center; justify-content: center;
+transition: transform 0.3s, box-shadow 0.3s;
+}
+.sport-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+.sport-card.badminton {
+background: linear-gradient(160deg, #1b5e20, #2e7d32, #1a237e);
+}
+.sport-card.cricket {
+background: linear-gradient(160deg, #0d47a1, #1565c0, #4a148c);
+}
+.sport-card::before {
+content: '';
+position: absolute; inset: 0;
+background: rgba(0,0,0,0.15);
+transition: background 0.3s;
+}
+.sport-card:hover::before { background: rgba(0,0,0,0); }
+.sport-emoji {
+font-size: 5rem; margin-bottom: 1.5rem;
+position: relative; z-index: 1;
+filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+transition: transform 0.3s;
+}
+.sport-card:hover .sport-emoji { transform: scale(1.15); }
+.sport-name {
+color: #fff; font-size: 1.8rem; font-weight: 900;
+position: relative; z-index: 1;
+text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+.sport-sub {
+color: rgba(255,255,255,0.75); font-size: 0.9rem;
+margin-top: 0.5rem; position: relative; z-index: 1;
+}
+.enter-btn {
+margin-top: 1.5rem;
+background: rgba(255,255,255,0.15);
+border: 1px solid rgba(255,255,255,0.4);
+color: #fff; padding: 0.5rem 1.5rem;
+border-radius: 50px; font-size: 0.85rem; font-weight: 600;
+position: relative; z-index: 1;
+transition: background 0.2s;
+}
+.sport-card:hover .enter-btn { background: rgba(255,255,255,0.3); }
+.footer-text { color: rgba(255,255,255,0.3); font-size: 0.8rem; margin-top: 3rem; }
+@media (max-width: 600px) {
+.sports-grid { grid-template-columns: 1fr; max-width: 360px; }
+.sport-card { aspect-ratio: 4/3; }
+.sport-emoji { font-size: 3.5rem; }
+.sport-name { font-size: 1.4rem; }
+}
+</style></head><body><div class="lang-switcher"><button class="lang-btn active" onclick="setLang('en')">EN</button><button class="lang-btn" onclick="setLang('fi')">FI</button></div><div class="logo-wrap"><img src="images/alpha_logo.png" alt="Alpha Ry" onerror="this.style.display='none'" /><h1>Alpha Ry</h1><p data-en="Which sport are you here for?" data-fi="Minkä lajin sivuille haluat siirtyä?">Which sport are you here for?</p></div><div class="sports-grid"><a href="badminton/index.html" class="sport-card badminton"><div class="sport-emoji">🏸</div><div class="sport-name" data-en="Badminton" data-fi="Sulkapallo">Badminton</div><div class="sport-sub" data-en="Kids & Adults" data-fi="Lapset ja aikuiset">Kids & Adults</div><div class="enter-btn" data-en="Enter →" data-fi="Siirry →">Enter →</div></a><a href="cricket/index.html" class="sport-card cricket"><div class="sport-emoji">🏏</div><div class="sport-name" data-en="Cricket" data-fi="Kriketti">Cricket</div><div class="sport-sub" data-en="Kids & Adults" data-fi="Lapset ja aikuiset">Kids & Adults</div><div class="enter-btn" data-en="Enter →" data-fi="Siirry →">Enter →</div></a></div><p class="footer-text">© 2025 Alpha Ry · Non-Profit Sports Club · Espoo, Finland</p><script>
+function setLang(lang) {
+document.querySelectorAll('[data-en]').forEach(el => {
+el.textContent = el.getAttribute('data-' + lang);
+});
+document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+document.documentElement.lang = lang;
+}
+</script></body></html>
