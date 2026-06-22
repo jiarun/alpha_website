@@ -16,8 +16,8 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://www.alphary.org/kids/</loc>
-    <priority>0.9</priority>
-    <changefreq>monthly</changefreq>
+    <loc>https://www.alphary.org/events/</loc>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
   </url>
 </urlset>

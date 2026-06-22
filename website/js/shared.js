@@ -35,8 +35,10 @@ function initHamburger() {
   hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
     mobileNav.classList.toggle('open');
-    document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
-    hamburger.setAttribute('aria-expanded', mobileNav.classList.contains('open'));
+    const isOpen = mobileNav.classList.contains('open');
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    hamburger.setAttribute('aria-expanded', isOpen);
+    mobileNav.setAttribute('aria-hidden', !isOpen);
   });
 
   mobileNav.querySelectorAll('a').forEach(link => {
@@ -45,36 +47,72 @@ function initHamburger() {
       mobileNav.classList.remove('open');
       document.body.style.overflow = '';
       hamburger.setAttribute('aria-expanded', 'false');
+      mobileNav.setAttribute('aria-hidden', 'true');
     });
   });
 }
 document.addEventListener('DOMContentLoaded', initHamburger);
 
 // Smooth Scroll
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    e.preventDefault();
-    const target = document.querySelector(a.getAttribute('href'));
-    if (target) target.scrollIntoView({ behavior: 'smooth' });
-  });
+document.addEventListener('click', e => {
+  const anchor = e.target.closest('a[href^="#"]');
+  if (!anchor) return;
+  e.preventDefault();
+  const target = document.querySelector(anchor.getAttribute('href'));
+  if (target) target.scrollIntoView({ behavior: 'smooth' });
 });
 
-// Lightbox
+// Lightbox with accessibility
 function openLightbox(src) {
   const lb = document.getElementById('lightbox');
   const img = document.getElementById('lightbox-img');
   if (!lb || !img) return;
   img.src = src;
+  img.alt = 'Enlarged photo';
   lb.classList.add('open');
+  lb.setAttribute('aria-hidden', 'false');
+  lb.setAttribute('role', 'dialog');
+  lb.setAttribute('aria-label', 'Image lightbox');
   document.body.style.overflow = 'hidden';
+  // Focus close button
+  const closeBtn = document.getElementById('lightbox-close');
+  if (closeBtn) closeBtn.focus();
 }
+
 function closeLightbox() {
   const lb = document.getElementById('lightbox');
   if (!lb) return;
   lb.classList.remove('open');
+  lb.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
 }
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeLightbox();
+    closeCampOverlay();
+  }
+});
+
+// Camp popup (used on cricket page)
+function closeCampOverlay() {
+  const overlay = document.getElementById('camp-overlay');
+  if (!overlay) return;
+  overlay.classList.remove('open');
+  overlay.setAttribute('aria-hidden', 'true');
+  sessionStorage.setItem('cricketCampSeen', '1');
+}
+
+function initCampPopup(delay) {
+  if (sessionStorage.getItem('cricketCampSeen')) return;
+  setTimeout(() => {
+    const overlay = document.getElementById('camp-overlay');
+    if (overlay) {
+      overlay.classList.add('open');
+      overlay.setAttribute('aria-hidden', 'false');
+    }
+  }, delay || 2000);
+}
 
 // Form Submit
 function handleSubmit(e) {
