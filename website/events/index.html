@@ -153,7 +153,7 @@
 
   <a href="#events" class="skip-nav" style="position:absolute;top:-100%;left:1rem;z-index:9999;background:#fdd835;color:#1a1a1a;padding:0.8rem 1.5rem;border-radius:0 0 8px 8px;font-weight:700;text-decoration:none;" onfocus="this.style.top='0'" onblur="this.style.top='-100%'">Skip to content</a>
 
-  <a href="../index.html" class="back-link">← All Sports</a>
+  <a href="../index.html" class="back-link" data-en="← All Sports" data-fi="← Kaikki lajit">← All Sports</a>
 
   <!-- NAV -->
   <nav>
@@ -171,7 +171,7 @@
       <button class="lang-btn" onclick="setLang('fi')">FI</button>
     </div>
   </nav>
-  <div class="mobile-nav" role="navigation" aria-label="Mobile navigation"><a href="#events">Events</a><a href="#contact">Contact</a><a href="../index.html">Home</a></div>
+  <div class="mobile-nav" role="navigation" aria-label="Mobile navigation"><a href="#events" data-en="Events" data-fi="Tapahtumat">Events</a><a href="#contact" data-en="Contact" data-fi="Yhteystiedot">Contact</a><a href="../index.html" data-en="Home" data-fi="Etusivu">Home</a></div>
 
   <!-- HERO -->
   <section id="hero" class="hero">
@@ -201,13 +201,14 @@
       <!-- Filters -->
       <div class="filters">
         <button class="filter-btn active" onclick="filterEvents('all')">All</button>
-        <button class="filter-btn" onclick="filterEvents('tech')">🧠 Tech & Code</button>
-        <button class="filter-btn" onclick="filterEvents('chess')">♟️ Chess</button>
-        <button class="filter-btn" onclick="filterEvents('stem')">🤖 STEM</button>
         <button class="filter-btn" onclick="filterEvents('badminton')">🏸 Badminton</button>
         <button class="filter-btn" onclick="filterEvents('cricket')">🏏 Cricket</button>
-        <button class="filter-btn" onclick="filterEvents('community')">🎉 Community</button>
+        <button class="filter-btn" disabled style="opacity:0.4;cursor:default;">🧠 Tech & Code</button>
+        <button class="filter-btn" disabled style="opacity:0.4;cursor:default;">♟️ Chess</button>
+        <button class="filter-btn" disabled style="opacity:0.4;cursor:default;">🤖 STEM</button>
+        <button class="filter-btn" disabled style="opacity:0.4;cursor:default;">🎉 Community</button>
       </div>
+      <p style="text-align:center;color:#555;font-size:0.75rem;margin-top:-1.5rem;margin-bottom:2rem;" data-en="More event categories coming soon" data-fi="Lisää tapahtumakategorioita tulossa pian">More event categories coming soon</p>
 
       <!-- Events Grid -->
       <div class="events-grid" id="eventsGrid"></div>
@@ -256,7 +257,7 @@
   </footer>
 
   <!-- FLOATING BUTTON -->
-  <a class="float-btn" href="https://alphary.myclub.fi/flow/courses/public" target="_blank">
+  <a class="float-btn" href="https://alphary.myclub.fi/flow/events/public" target="_blank">
     <span>🎯</span>
     <span data-en="Register" data-fi="Ilmoittaudu">Register</span>
   </a>
@@ -266,64 +267,24 @@
   // ===== EVENT DATA — Edit this array to add/remove events =====
   const events = [
     {
-      title: { en: "Kids Hackathon 2026", fi: "Lasten Hackathon 2026" },
-      description: { en: "Build apps & games in teams. Scratch, Python & web basics. Mentored by tech professionals.", fi: "Rakenna sovelluksia ja pelejä tiimeissä. Scratch, Python ja web-perusteet. Teknologia-ammattilaisten ohjauksessa." },
-      date: "2026-08-15",
-      time: "10:00 – 16:00",
-      category: "tech",
-      age: "8–15",
-      location: "Espoo, Finland",
-      registerUrl: "https://alphary.myclub.fi/flow/courses/public"
+      title: { en: "Cricket Summer Camp 2026", fi: "Kriketin kesäleiri 2026" },
+      description: { en: "Intensive cricket training camp with ICC-certified coaches. Batting, bowling, fielding and match play. All skill levels welcome.", fi: "Intensiivinen krikettileiri ICC-sertifioitujen valmentajien kanssa. Lyönti, heitto, kenttäpeli ja ottelupeli. Kaikki tasot tervetulleita." },
+      date: "2026-07-20",
+      time: "09:00 – 14:00",
+      category: "cricket",
+      age: "All ages",
+      location: "Kilo Ground, Espoo",
+      registerUrl: "https://alphary.myclub.fi/flow/events/public"
     },
     {
-      title: { en: "Chess Tournament - Summer", fi: "Shakkiturnaus - Kesä" },
-      description: { en: "Inter-club chess tournament for all levels. Beginner to advanced categories.", fi: "Seurojen välinen shakkiturnaus kaikille tasoille. Aloittelijasta edistyneeseen." },
-      date: "2026-08-22",
-      time: "09:00 – 15:00",
-      category: "chess",
-      age: "6–15",
-      location: "Espoo, Finland",
-      registerUrl: "https://alphary.myclub.fi/flow/courses/public"
-    },
-    {
-      title: { en: "Badminton Summer Camp", fi: "Sulkapallon kesäleiri" },
-      description: { en: "Intensive badminton training camp with BWF-certified coaches. All skill levels welcome.", fi: "Intensiivinen sulkapalloleiri BWF-sertifioitujen valmentajien kanssa. Kaikki tasot tervetulleita." },
-      date: "2026-07-10",
+      title: { en: "Badminton Summer Camp 2026", fi: "Sulkapallon kesäleiri 2026" },
+      description: { en: "Week-long intensive badminton camp with BWF-certified coaches. Completed successfully with 50+ participants!", fi: "Viikon intensiivinen sulkapalloleiri BWF-sertifioitujen valmentajien kanssa. Suoritettu onnistuneesti yli 50 osallistujalla!" },
+      date: "2026-06-10",
       time: "09:00 – 14:00",
       category: "badminton",
       age: "All ages",
       location: "Espoo, Finland",
-      registerUrl: "https://alphary.myclub.fi/flow/courses/public"
-    },
-    {
-      title: { en: "Cricket Weekend Tournament", fi: "Kriketin viikonlopputurnaus" },
-      description: { en: "Friendly cricket matches with ICC-certified coaching. Teams of all levels.", fi: "Ystävällisiä krikettiottteluita ICC-sertifioitujen valmentajien kanssa." },
-      date: "2026-09-05",
-      time: "10:00 – 17:00",
-      category: "cricket",
-      age: "All ages",
-      location: "Espoo, Finland",
-      registerUrl: "https://alphary.myclub.fi/flow/courses/public"
-    },
-    {
-      title: { en: "Robotics & STEM Workshop", fi: "Robotiikka ja STEM -työpaja" },
-      description: { en: "Build and program robots. Science experiments and electronics basics.", fi: "Rakenna ja ohjelmoi robotteja. Tiedekokeita ja elektroniikan perusteita." },
-      date: "2026-09-12",
-      time: "10:00 – 14:00",
-      category: "stem",
-      age: "8–15",
-      location: "Espoo, Finland",
-      registerUrl: "https://alphary.myclub.fi/flow/courses/public"
-    },
-    {
-      title: { en: "Alpha Ry Community Day", fi: "Alpha Ry Yhteisöpäivä" },
-      description: { en: "Family fun day with games, food and sports demos. Everyone welcome!", fi: "Perheen hauskaa pelien, ruoan ja urheilun parissa. Kaikki tervetulleita!" },
-      date: "2026-10-01",
-      time: "11:00 – 16:00",
-      category: "community",
-      age: "All ages",
-      location: "Espoo, Finland",
-      registerUrl: "https://alphary.myclub.fi/flow/courses/public"
+      registerUrl: "https://alphary.myclub.fi/flow/events/public"
     }
   ];
 
@@ -348,6 +309,10 @@
 
     if (filtered.length === 0) {
       grid.innerHTML = '';
+      const emptyMsg = currentView === 'upcoming'
+        ? (lang === 'fi' ? 'Ei tulevia tapahtumia tälle kategorialle. Pyäy tulevista tapahtumista!' : 'No upcoming events for this category. Stay tuned for more!')
+        : (lang === 'fi' ? 'Ei menneitä tapahtumia tälle kategorialle.' : 'No past events for this category.');
+      noEvents.textContent = emptyMsg;
       noEvents.style.display = 'block';
       return;
     }
