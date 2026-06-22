@@ -5,7 +5,7 @@
 "name": "Alpha Ry",
 "url": "https://www.alphary.org/",
 "logo": "https://www.alphary.org/images/alpha_logo.png",
-"description": "Sports club offering badminton and cricket coaching in Espoo, Finland.",
+"description": "Non-profit sports club with BWF-certified badminton coaches and ICC-certified cricket coaches in Espoo, Finland.",
 "address": {
 "@type": "PostalAddress",
 "addressLocality": "Espoo",
@@ -29,66 +29,90 @@ padding: 2rem;
 }
 .lang-switcher {
 position: fixed; top: 1.5rem; right: 2rem;
-display: flex; gap: 0.5rem;
+display: flex; gap: 0.5rem; z-index: 10;
 }
 .lang-btn {
 background: transparent; border: 1px solid rgba(255,255,255,0.4);
-color: #fff; padding: 0.3rem 0.8rem; border-radius: 20px;
-cursor: pointer; font-size: 0.85rem; transition: all 0.2s;
+color: #fff; padding: 0.4rem 1rem; border-radius: 20px;
+cursor: pointer; font-size: 0.85rem; font-weight: 600; transition: all 0.2s;
 }
 .lang-btn.active, .lang-btn:hover { background: #fdd835; color: #1a1a1a; border-color: #fdd835; }
+.lang-btn:focus-visible { outline: 3px solid #fdd835; outline-offset: 2px; }
 .logo-wrap { text-align: center; margin-bottom: 3rem; }
-.logo-wrap img { height: 70px; width: auto; }
+.logo-wrap img { height: 140px; width: auto; }
 .logo-wrap h1 { color: #fff; font-size: 1.8rem; font-weight: 900; margin-top: 1rem; letter-spacing: 1px; }
 .logo-wrap p { color: rgba(255,255,255,0.6); margin-top: 0.5rem; font-size: 1rem; }
 .sports-grid {
 display: grid;
-grid-template-columns: 1fr 1fr;
+grid-template-columns: 1fr 1fr 1fr;
 gap: 2rem;
 width: 100%;
-max-width: 800px;
+max-width: 1100px;
 }
 .sport-card {
 position: relative; overflow: hidden;
 border-radius: 24px; cursor: pointer;
 text-decoration: none;
-aspect-ratio: 3/4;
+aspect-ratio: 1/1;
 display: flex; flex-direction: column;
 align-items: center; justify-content: center;
 transition: transform 0.3s, box-shadow 0.3s;
+border: 2px solid transparent;
 }
+.sport-card:focus-visible { outline: 3px solid #fdd835; outline-offset: 4px; }
 .sport-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
 .sport-card.badminton {
-background: linear-gradient(160deg, #1b5e20, #2e7d32, #1a237e);
+background: linear-gradient(160deg, #1a2744, #003580, #0d47a1);
+border-color: rgba(253,216,53,0.3);
 }
 .sport-card.cricket {
-background: linear-gradient(160deg, #0d47a1, #1565c0, #4a148c);
+background: linear-gradient(160deg, #003580, #1a2744, #0d2137);
+border-color: rgba(255,255,255,0.2);
+}
+.sport-card.events {
+background: linear-gradient(160deg, #0d2137, #1a2744, #003580);
+border-color: rgba(0,53,128,0.5);
 }
 .sport-card::before {
 content: '';
 position: absolute; inset: 0;
-background: rgba(0,0,0,0.15);
+background: rgba(0,0,0,0.1);
 transition: background 0.3s;
 }
 .sport-card:hover::before { background: rgba(0,0,0,0); }
+.sport-card.badminton::after {
+content: ''; position: absolute; top: -50px; right: -50px;
+width: 150px; height: 150px; border-radius: 50%;
+background: rgba(253,216,53,0.08);
+}
+.sport-card.cricket::after {
+content: ''; position: absolute; bottom: -50px; left: -50px;
+width: 150px; height: 150px; border-radius: 50%;
+background: rgba(255,255,255,0.05);
+}
+.sport-card.events::after {
+content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+width: 200px; height: 200px; border-radius: 50%;
+background: rgba(0,53,128,0.1);
+}
 .sport-emoji {
-font-size: 5rem; margin-bottom: 1.5rem;
+font-size: 4.5rem; margin-bottom: 1.2rem;
 position: relative; z-index: 1;
 filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
 transition: transform 0.3s;
 }
 .sport-card:hover .sport-emoji { transform: scale(1.15); }
 .sport-name {
-color: #fff; font-size: 1.8rem; font-weight: 900;
+color: #fff; font-size: 1.6rem; font-weight: 900;
 position: relative; z-index: 1;
 text-shadow: 0 2px 8px rgba(0,0,0,0.4);
 }
 .sport-sub {
-color: rgba(255,255,255,0.75); font-size: 0.9rem;
-margin-top: 0.5rem; position: relative; z-index: 1;
+color: rgba(255,255,255,0.7); font-size: 0.85rem;
+margin-top: 0.4rem; position: relative; z-index: 1;
 }
 .enter-btn {
-margin-top: 1.5rem;
+margin-top: 1.2rem;
 background: rgba(255,255,255,0.15);
 border: 1px solid rgba(255,255,255,0.4);
 color: #fff; padding: 0.5rem 1.5rem;
@@ -98,13 +122,39 @@ transition: background 0.2s;
 }
 .sport-card:hover .enter-btn { background: rgba(255,255,255,0.3); }
 .footer-text { color: rgba(255,255,255,0.3); font-size: 0.8rem; margin-top: 3rem; }
-@media (max-width: 600px) {
-.sports-grid { grid-template-columns: 1fr; max-width: 360px; }
-.sport-card { aspect-ratio: 4/3; }
+.social-links {
+display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem;
+}
+.social-links a {
+color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.85rem;
+transition: color 0.2s;
+}
+.social-links a:hover { color: #fdd835; }
+@media (max-width: 768px) {
+.sports-grid { grid-template-columns: 1fr; max-width: 380px; }
+.sport-card { aspect-ratio: 5/4; }
 .sport-emoji { font-size: 3.5rem; }
 .sport-name { font-size: 1.4rem; }
+.logo-wrap img { height: 100px; }
 }
-</style></head><body><div class="lang-switcher"><button class="lang-btn active" onclick="setLang('en')">EN</button><button class="lang-btn" onclick="setLang('fi')">FI</button></div><div class="logo-wrap"><img src="images/alpha_logo.png" alt="Alpha Ry" onerror="this.style.display='none'" /><h1>Alpha Ry</h1><p data-en="Which sport are you here for?" data-fi="Minkä lajin sivuille haluat siirtyä?">Which sport are you here for?</p></div><div class="sports-grid"><a href="badminton/index.html" class="sport-card badminton"><div class="sport-emoji">🏸</div><div class="sport-name" data-en="Badminton" data-fi="Sulkapallo">Badminton</div><div class="sport-sub" data-en="Kids & Adults" data-fi="Lapset ja aikuiset">Kids & Adults</div><div class="enter-btn" data-en="Enter →" data-fi="Siirry →">Enter →</div></a><a href="cricket/index.html" class="sport-card cricket"><div class="sport-emoji">🏏</div><div class="sport-name" data-en="Cricket" data-fi="Kriketti">Cricket</div><div class="sport-sub" data-en="Kids & Adults" data-fi="Lapset ja aikuiset">Kids & Adults</div><div class="enter-btn" data-en="Enter →" data-fi="Siirry →">Enter →</div></a></div><p class="footer-text">© 2026 Alpha Ry · Non-Profit Sports Club · Espoo, Finland</p><script>
+</style></head><body>
+<a href="#main" class="skip-nav" style="position:absolute;top:-100%;left:1rem;z-index:9999;background:#fdd835;color:#1a1a1a;padding:0.8rem 1.5rem;border-radius:0 0 8px 8px;font-weight:700;text-decoration:none;transition:top 0.2s;" onfocus="this.style.top='0'" onblur="this.style.top='-100%'">Skip to content</a>
+<div class="lang-switcher" role="group" aria-label="Language selection"><button class="lang-btn active" onclick="setLang('en')" aria-label="English">EN</button><button class="lang-btn" onclick="setLang('fi')" aria-label="Suomi">FI</button></div>
+<main id="main">
+<div class="logo-wrap"><img src="images/alpha_logo.png" alt="Alpha Ry - Badminton and Cricket Sports Club, Espoo Finland" onerror="this.style.display='none'" /><h1>Alpha Ry</h1><p data-en="Which sport are you here for?" data-fi="Minkä lajin sivuille haluat siirtyä?">Which sport are you here for?</p></div>
+<div class="sports-grid" role="navigation" aria-label="Sport sections">
+<a href="badminton/index.html" class="sport-card badminton" aria-label="Badminton coaching for kids and adults"><div class="sport-emoji">🏸</div><div class="sport-name" data-en="Badminton" data-fi="Sulkapallo">Badminton</div><div class="sport-sub" data-en="BWF Certified Coaches" data-fi="BWF-sertifioidut valmentajat">BWF Certified Coaches</div><div class="enter-btn" data-en="Enter →" data-fi="Siirry →">Enter →</div></a>
+<a href="cricket/index.html" class="sport-card cricket" aria-label="Cricket coaching for kids and adults"><div class="sport-emoji">🏏</div><div class="sport-name" data-en="Cricket" data-fi="Kriketti">Cricket</div><div class="sport-sub" data-en="ICC Certified Coaches" data-fi="ICC-sertifioidut valmentajat">ICC Certified Coaches</div><div class="enter-btn" data-en="Enter →" data-fi="Siirry →">Enter →</div></a>
+<a href="events/index.html" class="sport-card events" aria-label="Events - hackathons, camps and more"><div class="sport-emoji">🎯</div><div class="sport-name" data-en="Events" data-fi="Tapahtumat">Events</div><div class="sport-sub" data-en="Hackathons, Camps & More" data-fi="Hackathonit, leirit ja muuta">Hackathons, Camps & More</div><div class="enter-btn" data-en="Enter →" data-fi="Siirry →">Enter →</div></a>
+</div>
+<div class="social-links">
+<a href="https://www.facebook.com/profile.php?id=61573707081824" target="_blank" rel="noopener" aria-label="Facebook">Facebook</a>
+<a href="https://www.instagram.com/vralphary/" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a>
+<a href="mailto:info@alphary.org" aria-label="Email">info@alphary.org</a>
+</div>
+<p class="footer-text">© <span class="footer-year">2026</span> Alpha Ry · Non-Profit Sports Club · Espoo, Finland</p>
+</main>
+<script>
 function setLang(lang) {
 document.querySelectorAll('[data-en]').forEach(el => {
 el.textContent = el.getAttribute('data-' + lang);
@@ -112,5 +162,11 @@ el.textContent = el.getAttribute('data-' + lang);
 document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
 document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
 document.documentElement.lang = lang;
+localStorage.setItem('alphary-lang', lang);
 }
+document.addEventListener('DOMContentLoaded', () => {
+const saved = localStorage.getItem('alphary-lang');
+if (saved && saved !== 'en') setLang(saved);
+document.querySelectorAll('.footer-year').forEach(el => { el.textContent = new Date().getFullYear(); });
+});
 </script></body></html>

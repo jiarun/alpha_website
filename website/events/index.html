@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alpha Ry Events | Hackathons, Tournaments & Camps in Espoo, Finland</title>
+  <meta name="description" content="Upcoming events by Alpha Ry — hackathons, chess tournaments, cricket matches, badminton camps, STEM workshops and more in Espoo, Finland." />
+  <meta name="keywords" content="sports events Espoo, kids hackathon Finland, chess tournament Espoo, cricket tournament Finland, badminton camp Espoo, Alpha Ry events" />
+  <meta name="author" content="Alpha Ry" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.alphary.org/events/" />
+  <meta property="og:title" content="Alpha Ry Events | Espoo, Finland" />
+  <meta property="og:description" content="Upcoming hackathons, tournaments, camps and workshops by Alpha Ry in Espoo, Finland." />
+  <meta property="og:image" content="https://www.alphary.org/images/alpha_logo.png" />
+  <meta property="og:url" content="https://www.alphary.org/events/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="fi_FI" />
+  <link rel="preload" as="style" href="../css/shared.css" />
+  <link rel="stylesheet" href="../css/shared.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EventSeries",
+    "name": "Alpha Ry Events",
+    "url": "https://www.alphary.org/events/",
+    "organizer": {
+      "@type": "SportsOrganization",
+      "name": "Alpha Ry",
+      "url": "https://www.alphary.org/"
+    },
+    "location": {
+      "@type": "Place",
+      "name": "Espoo, Finland",
+      "address": { "@type": "PostalAddress", "addressLocality": "Espoo", "addressCountry": "FI" }
+    }
+  }
+  </script>
+  <style>
+    :root {
+      --accent: #fdd835;
+      --dark: #0a0a0a;
+      --card-bg: #1a1a1a;
+    }
+
+    /* HERO */
+    #hero {
+      background: linear-gradient(135deg, rgba(10,10,10,0.92), rgba(26,26,26,0.95)),
+        url('../images/alpha_logo.png') center/contain no-repeat;
+      background-color: var(--dark);
+      min-height: 60vh;
+    }
+    #hero::before { background: none; }
+    #hero .hero-content h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+
+    /* FILTERS */
+    .filters {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .filter-btn {
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2);
+      color: #ccc; padding: 0.5rem 1.2rem; border-radius: 25px;
+      cursor: pointer; font-size: 0.85rem; font-weight: 600; transition: all 0.2s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--accent); color: #1a1a1a; border-color: var(--accent);
+    }
+
+    /* EVENTS SECTION */
+    #events { background: var(--dark); padding: 4rem 2rem; }
+    #events .section-title h2 { color: #fff; }
+    #events .section-title p { color: #aaa; }
+
+    /* EVENT CARDS */
+    .events-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem; max-width: 1100px; margin: 0 auto;
+    }
+    .event-card {
+      background: var(--card-bg); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px; padding: 1.8rem; transition: transform 0.3s, box-shadow 0.3s;
+      display: flex; flex-direction: column;
+    }
+    .event-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.4); }
+    .event-card.past { opacity: 0.5; }
+    .event-meta { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+    .event-badge {
+      padding: 0.25rem 0.7rem; border-radius: 20px;
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+    }
+    .badge-tech { background: #f3e5f5; color: #6a1b9a; }
+    .badge-chess { background: #e8eaf6; color: #283593; }
+    .badge-stem { background: #e0f7fa; color: #006064; }
+    .badge-badminton { background: #e8f5e9; color: #1b5e20; }
+    .badge-cricket { background: #e3f2fd; color: #0d47a1; }
+    .badge-community { background: #fff3e0; color: #e65100; }
+    .badge-age { background: rgba(255,255,255,0.1); color: #ccc; }
+    .event-date {
+      color: var(--accent); font-size: 0.85rem; font-weight: 700; margin-bottom: 0.5rem;
+    }
+    .event-card h3 { color: #fff; font-size: 1.2rem; font-weight: 800; margin-bottom: 0.5rem; }
+    .event-card p { color: #aaa; font-size: 0.9rem; line-height: 1.5; flex: 1; }
+    .event-location { color: #888; font-size: 0.8rem; margin-top: 1rem; }
+    .event-cta {
+      display: inline-block; margin-top: 1.2rem; background: var(--accent); color: #1a1a1a;
+      padding: 0.6rem 1.5rem; border-radius: 25px; font-size: 0.85rem; font-weight: 700;
+      text-decoration: none; transition: opacity 0.2s; text-align: center;
+    }
+    .event-cta:hover { opacity: 0.85; }
+    .event-cta.past-cta { background: rgba(255,255,255,0.1); color: #888; pointer-events: none; }
+
+    /* EMPTY STATE */
+    .no-events { text-align: center; color: #666; padding: 3rem; font-size: 1.1rem; }
+
+    /* TOGGLE */
+    .toggle-wrap { text-align: center; margin-bottom: 2rem; padding: 0.4rem; background: rgba(255,255,255,0.05); border-radius: 30px; display: inline-flex; gap: 0.3rem; }
+    .toggle-wrap-container { text-align: center; margin-bottom: 2rem; }
+    .toggle-btn {
+      background: transparent; border: none;
+      color: rgba(255,255,255,0.6); padding: 0.6rem 1.5rem; border-radius: 25px;
+      cursor: pointer; font-size: 0.9rem; font-weight: 600; transition: all 0.2s;
+    }
+    .toggle-btn.active { background: var(--accent); color: #1a1a1a; }
+
+    /* CONTACT */
+    #contact { background: linear-gradient(135deg, #1a2744, #003580); }
+    #contact .section-title h2 { color: #fff; }
+    #contact .section-title p { color: rgba(255,255,255,0.7); }
+    form input:focus, form select:focus, form textarea:focus { border-color: #003580; }
+    form button { background: #003580; }
+
+    .float-btn { background: #003580; }
+
+    /* HAMBURGER */
+    .hamburger { display: none; background: none; border: none; cursor: pointer; width: 30px; height: 24px; position: relative; z-index: 101; }
+    .hamburger span { display: block; width: 100%; height: 3px; background: #fff; border-radius: 2px; transition: all 0.3s; position: absolute; left: 0; }
+    .hamburger span:nth-child(1) { top: 0; }
+    .hamburger span:nth-child(2) { top: 10px; }
+    .hamburger span:nth-child(3) { top: 20px; }
+    .hamburger.active span:nth-child(1) { top: 10px; transform: rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { top: 10px; transform: rotate(-45deg); }
+    .mobile-nav { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.95); z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a { color: #fff; text-decoration: none; font-size: 1.3rem; font-weight: 700; }
+    .mobile-nav a:hover { color: #fdd835; }
+    :focus-visible { outline: 3px solid #fdd835; outline-offset: 2px; }
+    @media (max-width: 768px) { nav ul { display: none; } .hamburger { display: block; } }
+  </style>
+</head>
+<body>
+
+  <a href="#events" class="skip-nav" style="position:absolute;top:-100%;left:1rem;z-index:9999;background:#fdd835;color:#1a1a1a;padding:0.8rem 1.5rem;border-radius:0 0 8px 8px;font-weight:700;text-decoration:none;" onfocus="this.style.top='0'" onblur="this.style.top='-100%'">Skip to content</a>
+
+  <a href="../index.html" class="back-link">← All Sports</a>
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo">
+      <img src="../images/alpha_logo.png" alt="Alpha Ry Events" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" />
+      <span class="logo-text">Alpha Ry 🎯</span>
+    </div>
+    <button class="hamburger" aria-label="Open menu" aria-expanded="false" onclick="this.classList.toggle('active');document.querySelector('.mobile-nav').classList.toggle('open');this.setAttribute('aria-expanded',this.classList.contains('active'))"><span></span><span></span><span></span></button>
+    <ul>
+      <li><a href="#events" data-en="Events" data-fi="Tapahtumat">Events</a></li>
+      <li><a href="#contact" data-en="Contact" data-fi="Yhteystiedot">Contact</a></li>
+    </ul>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('fi')">FI</button>
+    </div>
+  </nav>
+  <div class="mobile-nav" role="navigation" aria-label="Mobile navigation"><a href="#events">Events</a><a href="#contact">Contact</a><a href="../index.html">Home</a></div>
+
+  <!-- HERO -->
+  <section id="hero" class="hero">
+    <div class="hero-content">
+      <h1>Alpha Ry<br><span>Events</span> 🎯</h1>
+      <p data-en="Hackathons, tournaments, camps & workshops — find your next event." data-fi="Hackathoneja, turnauksia, leirejä ja työpajoja — löydä seuraava tapahtumasi.">Hackathons, tournaments, camps & workshops — find your next event.</p>
+      <a href="#events" class="btn btn-yellow" data-en="View Events" data-fi="Näytä tapahtumat">View Events</a>
+    </div>
+  </section>
+
+  <!-- EVENTS -->
+  <section id="events">
+    <div class="container">
+      <div class="section-title">
+        <h2 data-en="Upcoming Events" data-fi="Tulevat tapahtumat">Upcoming Events</h2>
+        <p data-en="Filter by category to find events that interest you" data-fi="Suodata kategorian mukaan löytääksesi sinua kiinnostavat tapahtumat">Filter by category to find events that interest you</p>
+      </div>
+
+      <!-- Toggle -->
+      <div class="toggle-wrap-container">
+        <div class="toggle-wrap">
+          <button class="toggle-btn active" onclick="showEvents('upcoming')" data-en="Upcoming" data-fi="Tulevat">Upcoming</button>
+          <button class="toggle-btn" onclick="showEvents('past')" data-en="Past Events" data-fi="Menneet">Past Events</button>
+        </div>
+      </div>
+
+      <!-- Filters -->
+      <div class="filters">
+        <button class="filter-btn active" onclick="filterEvents('all')">All</button>
+        <button class="filter-btn" onclick="filterEvents('tech')">🧠 Tech & Code</button>
+        <button class="filter-btn" onclick="filterEvents('chess')">♟️ Chess</button>
+        <button class="filter-btn" onclick="filterEvents('stem')">🤖 STEM</button>
+        <button class="filter-btn" onclick="filterEvents('badminton')">🏸 Badminton</button>
+        <button class="filter-btn" onclick="filterEvents('cricket')">🏏 Cricket</button>
+        <button class="filter-btn" onclick="filterEvents('community')">🎉 Community</button>
+      </div>
+
+      <!-- Events Grid -->
+      <div class="events-grid" id="eventsGrid"></div>
+      <div class="no-events" id="noEvents" style="display:none" data-en="No events found for this category." data-fi="Tälle kategorialle ei löytynyt tapahtumia.">No events found for this category.</div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Get In <span style="color:#fdd835">Touch</span></h2>
+        <p data-en="Have questions about an event? Reach out to us." data-fi="Onko kysyttävää tapahtumista? Ota yhteyttä.">Have questions about an event? Reach out to us.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h3 data-en="Contact Us" data-fi="Ota yhteyttä">Contact Us</h3>
+          <div class="contact-item">
+            <div class="icon">📍</div>
+            <p><strong data-en="Location" data-fi="Sijainti">Location</strong>Espoo, Finland</p>
+          </div>
+          <div class="contact-item">
+            <div class="icon">✉️</div>
+            <p><strong data-en="Email" data-fi="Sähköposti">Email</strong><a href="mailto:info@alphary.org" style="color:rgba(255,255,255,0.85)">info@alphary.org</a></p>
+          </div>
+        </div>
+        <form onsubmit="handleSubmit(event)">
+          <input type="text" placeholder="Your Name" data-en-placeholder="Your Name" data-fi-placeholder="Nimesi" required />
+          <input type="email" placeholder="Email Address" data-en-placeholder="Email Address" data-fi-placeholder="Sähköpostiosoite" required />
+          <textarea placeholder="Your question about events..." data-en-placeholder="Your question about events..." data-fi-placeholder="Kysymyksesi tapahtumista..."></textarea>
+          <button type="submit" data-en="Send Message" data-fi="Lähetä viesti">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-links">
+      <a href="https://www.facebook.com/profile.php?id=61573707081824" target="_blank">📘 Facebook</a>
+      <a href="https://www.instagram.com/vralphary/" target="_blank">📸 Instagram</a>
+      <a href="https://alphary.myclub.fi" target="_blank">🎯 MyClub</a>
+      <a href="../index.html">🏠 Home</a>
+    </div>
+    <p>© <span class="footer-year">2026</span> <span>Alpha Ry</span> · Non-Profit Sports Club · Espoo, Finland</p>
+  </footer>
+
+  <!-- FLOATING BUTTON -->
+  <a class="float-btn" href="https://alphary.myclub.fi/flow/courses/public" target="_blank">
+    <span>🎯</span>
+    <span data-en="Register" data-fi="Ilmoittaudu">Register</span>
+  </a>
+
+  <script src="../js/shared.js"></script>
+  <script>
+  // ===== EVENT DATA — Edit this array to add/remove events =====
+  const events = [
+    {
+      title: { en: "Kids Hackathon 2026", fi: "Lasten Hackathon 2026" },
+      description: { en: "Build apps & games in teams. Scratch, Python & web basics. Mentored by tech professionals.", fi: "Rakenna sovelluksia ja pelejä tiimeissä. Scratch, Python ja web-perusteet. Teknologia-ammattilaisten ohjauksessa." },
+      date: "2026-08-15",
+      time: "10:00 – 16:00",
+      category: "tech",
+      age: "8–15",
+      location: "Espoo, Finland",
+      registerUrl: "https://alphary.myclub.fi/flow/courses/public"
+    },
+    {
+      title: { en: "Chess Tournament - Summer", fi: "Shakkiturnaus - Kesä" },
+      description: { en: "Inter-club chess tournament for all levels. Beginner to advanced categories.", fi: "Seurojen välinen shakkiturnaus kaikille tasoille. Aloittelijasta edistyneeseen." },
+      date: "2026-08-22",
+      time: "09:00 – 15:00",
+      category: "chess",
+      age: "6–15",
+      location: "Espoo, Finland",
+      registerUrl: "https://alphary.myclub.fi/flow/courses/public"
+    },
+    {
+      title: { en: "Badminton Summer Camp", fi: "Sulkapallon kesäleiri" },
+      description: { en: "Intensive badminton training camp with BWF-certified coaches. All skill levels welcome.", fi: "Intensiivinen sulkapalloleiri BWF-sertifioitujen valmentajien kanssa. Kaikki tasot tervetulleita." },
+      date: "2026-07-10",
+      time: "09:00 – 14:00",
+      category: "badminton",
+      age: "All ages",
+      location: "Espoo, Finland",
+      registerUrl: "https://alphary.myclub.fi/flow/courses/public"
+    },
+    {
+      title: { en: "Cricket Weekend Tournament", fi: "Kriketin viikonlopputurnaus" },
+      description: { en: "Friendly cricket matches with ICC-certified coaching. Teams of all levels.", fi: "Ystävällisiä krikettiottteluita ICC-sertifioitujen valmentajien kanssa." },
+      date: "2026-09-05",
+      time: "10:00 – 17:00",
+      category: "cricket",
+      age: "All ages",
+      location: "Espoo, Finland",
+      registerUrl: "https://alphary.myclub.fi/flow/courses/public"
+    },
+    {
+      title: { en: "Robotics & STEM Workshop", fi: "Robotiikka ja STEM -työpaja" },
+      description: { en: "Build and program robots. Science experiments and electronics basics.", fi: "Rakenna ja ohjelmoi robotteja. Tiedekokeita ja elektroniikan perusteita." },
+      date: "2026-09-12",
+      time: "10:00 – 14:00",
+      category: "stem",
+      age: "8–15",
+      location: "Espoo, Finland",
+      registerUrl: "https://alphary.myclub.fi/flow/courses/public"
+    },
+    {
+      title: { en: "Alpha Ry Community Day", fi: "Alpha Ry Yhteisöpäivä" },
+      description: { en: "Family fun day with games, food and sports demos. Everyone welcome!", fi: "Perheen hauskaa pelien, ruoan ja urheilun parissa. Kaikki tervetulleita!" },
+      date: "2026-10-01",
+      time: "11:00 – 16:00",
+      category: "community",
+      age: "All ages",
+      location: "Espoo, Finland",
+      registerUrl: "https://alphary.myclub.fi/flow/courses/public"
+    }
+  ];
+
+  let currentFilter = 'all';
+  let currentView = 'upcoming';
+
+  function renderEvents() {
+    const grid = document.getElementById('eventsGrid');
+    const noEvents = document.getElementById('noEvents');
+    const lang = localStorage.getItem('alphary-lang') || 'en';
+    const today = new Date().toISOString().split('T')[0];
+
+    let filtered = events.filter(e => {
+      const isPast = e.date < today;
+      const matchView = currentView === 'upcoming' ? !isPast : isPast;
+      const matchCat = currentFilter === 'all' || e.category === currentFilter;
+      return matchView && matchCat;
+    });
+
+    // Sort: upcoming = soonest first, past = most recent first
+    filtered.sort((a, b) => currentView === 'upcoming' ? a.date.localeCompare(b.date) : b.date.localeCompare(a.date));
+
+    if (filtered.length === 0) {
+      grid.innerHTML = '';
+      noEvents.style.display = 'block';
+      return;
+    }
+
+    noEvents.style.display = 'none';
+    grid.innerHTML = filtered.map(e => {
+      const isPast = e.date < today;
+      const title = e.title[lang] || e.title.en;
+      const desc = e.description[lang] || e.description.en;
+      const dateStr = new Date(e.date + 'T00:00:00').toLocaleDateString(lang === 'fi' ? 'fi-FI' : 'en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+      const ctaText = isPast ? (lang === 'fi' ? 'Päättynyt' : 'Ended') : (lang === 'fi' ? 'Ilmoittaudu' : 'Register');
+
+      return `
+        <div class="event-card ${isPast ? 'past' : ''}">
+          <div class="event-meta">
+            <span class="event-badge badge-${e.category}">${getCategoryLabel(e.category)}</span>
+            <span class="event-badge badge-age">${e.age}</span>
+          </div>
+          <div class="event-date">📅 ${dateStr} · ${e.time}</div>
+          <h3>${title}</h3>
+          <p>${desc}</p>
+          <div class="event-location">📍 ${e.location}</div>
+          <a href="${e.registerUrl}" target="_blank" class="event-cta ${isPast ? 'past-cta' : ''}">${ctaText}</a>
+        </div>`;
+    }).join('');
+  }
+
+  function getCategoryLabel(cat) {
+    const labels = { tech: '🧠 Tech & Code', chess: '♟️ Chess', stem: '🤖 STEM', badminton: '🏸 Badminton', cricket: '🏏 Cricket', community: '🎉 Community' };
+    return labels[cat] || cat;
+  }
+
+  function filterEvents(category) {
+    currentFilter = category;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+    renderEvents();
+  }
+
+  function showEvents(view) {
+    currentView = view;
+    document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+    renderEvents();
+  }
+
+  // Initial render
+  document.addEventListener('DOMContentLoaded', renderEvents);
+  // Re-render on language change
+  const origSetLang = setLang;
+  setLang = function(lang) { origSetLang(lang); renderEvents(); };
+  </script>
+</body>
+</html>
