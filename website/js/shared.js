@@ -1,5 +1,20 @@
 // ===== SHARED JS - Alpha Ry =====
 
+function updateLangUrl(lang) {
+  const url = new URL(window.location.href);
+  if (lang === 'fi') {
+    url.searchParams.set('lang', 'fi');
+  } else {
+    url.searchParams.delete('lang');
+  }
+  window.history.replaceState({}, '', url);
+
+  const canonical = document.querySelector('link[rel="canonical"]');
+  if (canonical) canonical.href = url.href;
+  const ogUrl = document.querySelector('meta[property="og:url"]');
+  if (ogUrl) ogUrl.content = url.href;
+}
+
 // Language Switcher
 function setLang(lang) {
   document.querySelectorAll('[data-en]').forEach(el => {
@@ -13,12 +28,16 @@ function setLang(lang) {
   if (btn) btn.classList.add('active');
   document.documentElement.lang = lang;
   localStorage.setItem('alphary-lang', lang);
+  updateLangUrl(lang);
 }
 
 // Restore saved language on page load
 document.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  const urlLang = params.get('lang');
   const saved = localStorage.getItem('alphary-lang');
-  if (saved && saved !== 'en') setLang(saved);
+  const initialLang = urlLang === 'fi' ? 'fi' : saved;
+  if (initialLang && initialLang !== 'en') setLang(initialLang);
 
   // Dynamic footer year
   document.querySelectorAll('.footer-year').forEach(el => {

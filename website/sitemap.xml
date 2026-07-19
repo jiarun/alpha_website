@@ -1,22 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.alphary.org/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.alphary.org/" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://www.alphary.org/?lang=fi" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.alphary.org/" />
+    <lastmod>2026-07-19</lastmod>
     <priority>1.0</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
     <loc>https://www.alphary.org/badminton/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.alphary.org/badminton/" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://www.alphary.org/badminton/?lang=fi" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.alphary.org/badminton/" />
+    <lastmod>2026-07-19</lastmod>
     <priority>0.9</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
     <loc>https://www.alphary.org/cricket/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.alphary.org/cricket/" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://www.alphary.org/cricket/?lang=fi" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.alphary.org/cricket/" />
+    <lastmod>2026-07-19</lastmod>
     <priority>0.9</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
     <loc>https://www.alphary.org/events/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.alphary.org/events/" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://www.alphary.org/events/?lang=fi" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.alphary.org/events/" />
+    <lastmod>2026-07-19</lastmod>
     <priority>0.8</priority>
     <changefreq>weekly</changefreq>
   </url>

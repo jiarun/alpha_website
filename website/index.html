@@ -10,6 +10,9 @@
   <meta name="author" content="Alpha Ry" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.alphary.org/" />
+  <link rel="alternate" hreflang="en" href="https://www.alphary.org/" />
+  <link rel="alternate" hreflang="fi" href="https://www.alphary.org/?lang=fi" />
+  <link rel="alternate" hreflang="x-default" href="https://www.alphary.org/" />
   <link rel="preconnect" href="https://alphary.myclub.fi" />
   <link rel="preconnect" href="https://www.facebook.com" />
   <meta property="og:title" content="Alpha Ry Sports | Badminton & Cricket in Espoo, Finland" />
@@ -33,8 +36,15 @@
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Espoo",
+      "addressRegion": "Uusimaa",
       "addressCountry": "FI"
     },
+    "areaServed": [
+      { "@type": "City", "name": "Espoo" },
+      { "@type": "AdministrativeArea", "name": "Uusimaa" }
+    ],
+    "sport": ["Badminton", "Cricket"],
+    "knowsAbout": ["Badminton coaching", "Cricket coaching", "Junior sports training", "Sports camps"],
     "email": "info@alphary.org",
     "sameAs": [
       "https://www.facebook.com/profile.php?id=61573707081824",
@@ -104,16 +114,50 @@
       position: relative; z-index: 1; transition: background 0.2s;
     }
     .sport-card:hover .enter-btn { background: rgba(255,255,255,0.3); }
-    .footer-text { color: rgba(255,255,255,0.3); font-size: 0.8rem; margin-top: 3rem; }
-    .social-links { display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem; }
-    .social-links a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
-    .social-links a:hover { color: #fdd835; }
+    .footer-text { color: rgba(255,255,255,0.3); font-size: 0.8rem; margin-top: 2rem; }
+    .social-panel {
+      margin-top: 2rem;
+      text-align: center;
+    }
+    .social-panel p {
+      color: rgba(255,255,255,0.62);
+      font-size: 0.88rem;
+      margin-bottom: 0.85rem;
+    }
+    .social-links {
+      display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;
+    }
+    .social-links a {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem;
+      min-height: 42px;
+      color: rgba(255,255,255,0.88); text-decoration: none; font-size: 0.88rem; font-weight: 700;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.08);
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      transition: transform 0.2s, background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .social-links a:hover {
+      color: #1a1a1a;
+      background: #fdd835;
+      border-color: #fdd835;
+      transform: translateY(-2px);
+    }
+    .social-icon {
+      width: 22px; height: 22px; border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: rgba(255,255,255,0.14);
+      font-size: 0.72rem; font-weight: 900;
+    }
+    .social-links a:hover .social-icon { background: rgba(26,26,26,0.12); }
     @media (max-width: 768px) {
       .sports-grid { grid-template-columns: 1fr; max-width: 380px; }
       .sport-card { aspect-ratio: 4/3; }
       .sport-emoji { font-size: 3.5rem; }
       .sport-name { font-size: 1.4rem; }
       .logo-wrap img { height: 130px; }
+      .social-panel { margin-top: 1.5rem; }
+      .social-links a { width: 100%; max-width: 260px; }
     }
   </style>
 </head>
@@ -153,10 +197,22 @@
       </a>
     </div>
 
-    <div class="social-links">
-      <a href="https://www.facebook.com/profile.php?id=61573707081824" target="_blank" rel="noopener" aria-label="Facebook">Facebook</a>
-      <a href="https://www.instagram.com/vralphary/" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a>
-      <a href="mailto:info@alphary.org" aria-label="Email">info@alphary.org</a>
+    <div class="social-panel" aria-label="Alpha Ry social media and contact links">
+      <p data-en="Follow our sessions, events, and community updates" data-fi="Seuraa harjoituksiamme, tapahtumiamme ja yhteisön kuulumisia">Follow our sessions, events, and community updates</p>
+      <div class="social-links">
+        <a href="https://www.facebook.com/profile.php?id=61573707081824" target="_blank" rel="noopener" aria-label="Follow Alpha Ry on Facebook">
+          <span class="social-icon" aria-hidden="true">f</span>
+          <span>Facebook</span>
+        </a>
+        <a href="https://www.instagram.com/vralphary/" target="_blank" rel="noopener" aria-label="Follow Alpha Ry on Instagram">
+          <span class="social-icon" aria-hidden="true">ig</span>
+          <span>Instagram</span>
+        </a>
+        <a href="mailto:info@alphary.org" aria-label="Email Alpha Ry">
+          <span class="social-icon" aria-hidden="true">@</span>
+          <span>info@alphary.org</span>
+        </a>
+      </div>
     </div>
     <p class="footer-text">© <span class="footer-year">2026</span> Alpha Ry · Non-Profit Sports Club · Espoo, Finland</p>
   </main>
