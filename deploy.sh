@@ -12,6 +12,8 @@ set -euo pipefail
 #   CPANEL_REMOTE_DIR    Remote directory, defaults to public_html/alphary.org
 #   CPANEL_FTP_PORT      FTP port, defaults to 21
 #   CPANEL_FTP_SSL       true/false, defaults to true
+#   DEPLOY_REF           Git ref to deploy, defaults to HEAD
+#   WEBSITE_DIR          Website directory in the repo, defaults to website
 #
 # Usage:
 #   ./deploy.sh
@@ -24,11 +26,13 @@ if [[ -f ".env.deploy" ]]; then
   set +a
 fi
 
-WEBSITE_DIR="${WEBSITE_DIR:-./website}"
+WEBSITE_DIR="${WEBSITE_DIR:-website}"
+DEPLOY_REF="${DEPLOY_REF:-HEAD}"
 REMOTE_DIR="${CPANEL_REMOTE_DIR:-public_html/alphary.org}"
 FTP_PORT="${CPANEL_FTP_PORT:-21}"
 FTP_SSL="${CPANEL_FTP_SSL:-true}"
 DRY_RUN=false
+DEPLOY_SOURCE=""
 
 if [[ "${1:-}" == "--dry-run" ]]; then
   DRY_RUN=true
@@ -46,8 +50,21 @@ for var in "${required_vars[@]}"; do
   fi
 done
 
-if [[ ! -d "$WEBSITE_DIR" ]]; then
-  echo "Website directory not found: $WEBSITE_DIR" >&2
+WEBSITE_PATH="${WEBSITE_DIR#./}"
+WEBSITE_PATH="${WEBSITE_PATH%/}"
+
+if ! command -v git >/dev/null 2>&1; then
+  echo "git is required to deploy files from the latest commit." >&2
+  exit 1
+fi
+
+if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  echo "deploy.sh must be run from inside the Git repository." >&2
+  exit 1
+fi
+
+if ! git cat-file -e "$DEPLOY_REF:$WEBSITE_PATH" 2>/dev/null; then
+  echo "Website directory not found in $DEPLOY_REF: $WEBSITE_PATH" >&2
   exit 1
 fi
 
@@ -63,9 +80,22 @@ else
   SSL_SETTING="set ftp:ssl-force false; set ftp:ssl-protect-data false;"
 fi
 
+prepare_deploy_source() {
+  DEPLOY_SOURCE="$(mktemp -d)"
+  git archive --format=tar "$DEPLOY_REF:$WEBSITE_PATH" | tar -x -C "$DEPLOY_SOURCE"
+}
+
+cleanup() {
+  if [[ -n "$DEPLOY_SOURCE" && -d "$DEPLOY_SOURCE" ]]; then
+    rm -rf "$DEPLOY_SOURCE"
+  fi
+}
+trap cleanup EXIT
+
 if [[ "$DRY_RUN" == "true" ]]; then
   echo "Running dry run. No files will be uploaded, changed, or deleted."
   echo "Checking FTP login and remote directory: $REMOTE_DIR"
+  echo "Deploy source would be $WEBSITE_PATH from commit $(git rev-parse --short "$DEPLOY_REF")."
 
   lftp <<LFTP_COMMANDS
 set cmd:fail-exit yes
@@ -80,7 +110,9 @@ LFTP_COMMANDS
   exit 0
 fi
 
-echo "Deploying $WEBSITE_DIR to $CPANEL_FTP_HOST:$REMOTE_DIR ..."
+prepare_deploy_source
+
+echo "Deploying $WEBSITE_PATH from commit $(git rev-parse --short "$DEPLOY_REF") to $CPANEL_FTP_HOST:$REMOTE_DIR ..."
 
 lftp <<LFTP_COMMANDS
 set cmd:fail-exit yes
@@ -88,7 +120,7 @@ set ssl:verify-certificate no
 $SSL_SETTING
 set ftp:list-options -a
 open -u "$CPANEL_FTP_USER","$CPANEL_FTP_PASSWORD" -p "$FTP_PORT" "$CPANEL_FTP_HOST"
-mirror --reverse --delete "$WEBSITE_DIR" "$REMOTE_DIR"
+mirror --reverse --delete "$DEPLOY_SOURCE" "$REMOTE_DIR"
 bye
 LFTP_COMMANDS
 
