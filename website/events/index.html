@@ -56,10 +56,11 @@
     {
       "@context": "https://schema.org",
       "@type": "SportsEvent",
-      "name": "Cricket Summer Camp 2026",
-      "description": "Intensive cricket training camp with ICC-certified coaches. Batting, bowling, fielding and match play for all skill levels.",
-      "startDate": "2026-07-20T09:00:00+03:00",
-      "endDate": "2026-07-20T14:00:00+03:00",
+      "name": "Kids Cricket Tournament 2026",
+      "description": "Kids cricket tournament organized by Alpha Ry with fun competition, team spirit, trophies and medals.",
+      "image": "https://www.alphary.org/images/cricket_tournament_2026.png",
+      "startDate": "2026-08-22T09:00:00+03:00",
+      "endDate": "2026-08-22T19:00:00+03:00",
       "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
       "eventStatus": "https://schema.org/EventScheduled",
       "location": {
@@ -79,7 +80,7 @@
       },
       "offers": {
         "@type": "Offer",
-        "url": "https://alphary.myclub.fi/flow/courses/public",
+        "url": "https://forms.gle/5UiJFxyNLENNzuKd7",
         "availability": "https://schema.org/InStock"
       },
       "url": "https://www.alphary.org/events/"
@@ -152,6 +153,10 @@
     .event-card h3 { color: #fff; font-size: 1.2rem; font-weight: 800; margin-bottom: 0.5rem; }
     .event-card p { color: #aaa; font-size: 0.9rem; line-height: 1.5; flex: 1; }
     .event-location { color: #888; font-size: 0.8rem; margin-top: 1rem; }
+    .event-poster {
+      width: 100%; aspect-ratio: 1055 / 1491; object-fit: cover;
+      border-radius: 12px; margin-bottom: 1.2rem; background: #0a0a0a;
+    }
     .event-cta {
       display: inline-block; margin-top: 1.2rem; background: var(--accent); color: #1a1a1a;
       padding: 0.6rem 1.5rem; border-radius: 25px; font-size: 0.85rem; font-weight: 700;
@@ -303,14 +308,16 @@
   // ===== EVENT DATA — Edit this array to add/remove events =====
   const events = [
     {
-      title: { en: "Cricket Summer Camp 2026", fi: "Kriketin kesäleiri 2026" },
-      description: { en: "Intensive cricket training camp with ICC-certified coaches. Batting, bowling, fielding and match play. All skill levels welcome.", fi: "Intensiivinen krikettileiri ICC-sertifioitujen valmentajien kanssa. Lyönti, heitto, kenttäpeli ja ottelupeli. Kaikki tasot tervetulleita." },
-      date: "2026-07-20",
-      time: "09:00 – 14:00",
+      title: { en: "Kids Cricket Tournament 2026", fi: "Lasten krikettiturnaus 2026" },
+      description: { en: "Kids cricket tournament with fun competition, team spirit, trophies and medals. Age categories: 7 to 11 and 12 to 16 years. Team size: 6 members. Backup day: August 23, 2026 for heavy rain or bad weather.", fi: "Lasten krikettiturnaus, jossa on hauskaa kilpailua, joukkuehenkeä, pokaaleja ja mitaleja. Ikäryhmät: 7-11 ja 12-16 vuotta. Joukkueen koko: 6 jäsentä. Varapäivä: 23. elokuuta 2026 rankkasateen tai huonon sään varalta." },
+      date: "2026-08-22",
+      time: "09:00 – 19:00",
       category: "cricket",
-      age: "All ages",
+      age: "Ages 7-16",
       location: "Kilo Ground, Espoo",
-      registerUrl: "https://alphary.myclub.fi/flow/courses/public"
+      registerUrl: "https://forms.gle/5UiJFxyNLENNzuKd7",
+      image: "../images/cricket_tournament_2026.png",
+      imageAlt: "Kids Cricket Tournament 2026 poster"
     },
     {
       title: { en: "Badminton Summer Camp 2026", fi: "Sulkapallon kesäleiri 2026" },
@@ -363,6 +370,7 @@
 
       return `
         <div class="event-card ${isPast ? 'past' : ''}">
+          ${e.image ? `<img class="event-poster" src="${e.image}" alt="${e.imageAlt || title}" loading="lazy" />` : ''}
           <div class="event-meta">
             <span class="event-badge badge-${e.category}">${getCategoryLabel(e.category)}</span>
             <span class="event-badge badge-age">${e.age}</span>

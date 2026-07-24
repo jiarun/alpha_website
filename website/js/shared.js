@@ -113,17 +113,17 @@ document.addEventListener('keydown', e => {
   }
 });
 
-// Camp popup (used on cricket page)
+// Promotional popup (used on cricket page)
 function closeCampOverlay() {
   const overlay = document.getElementById('camp-overlay');
   if (!overlay) return;
   overlay.classList.remove('open');
   overlay.setAttribute('aria-hidden', 'true');
-  sessionStorage.setItem('cricketCampSeen', '1');
+  sessionStorage.setItem('cricketTournamentSeen', '1');
 }
 
 function initCampPopup(delay) {
-  if (sessionStorage.getItem('cricketCampSeen')) return;
+  if (sessionStorage.getItem('cricketTournamentSeen')) return;
   setTimeout(() => {
     const overlay = document.getElementById('camp-overlay');
     if (overlay) {
